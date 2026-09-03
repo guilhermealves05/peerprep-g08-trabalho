@@ -17,7 +17,10 @@ export const createRoom = () => api.post<RoomData>("/rooms/create");
 
 /** Join a room and get its metadata (including questionId) in one call. */
 export const joinRoom = (roomId: string, user: User) =>
-  api.post<RoomData & { success: boolean }>("/rooms/join", { roomId, user });
+  api.post<RoomData & { success: boolean }>("/rooms/join", {
+    roomId,
+    user: { id: user.id },
+  });
 
 /** Fetch room metadata without joining (useful for reconnects). */
 export const getRoomById = (roomId: string) =>
